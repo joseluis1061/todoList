@@ -5,7 +5,6 @@ export const Todo = (todo) => {
   const { handleCompletedTodo, handleDeleteTodo } = useContext(AppContext);
 
   const handleCompleted = () =>{
-    console.log("Item todo 1", todo.todo.id)
     handleCompletedTodo(todo.todo.id);
   };
 

@@ -9,7 +9,7 @@ export const TodoList = () => {
   return (
     <section className='todo_list'>
       <div className="todo_list_container">
-        <h3><span className="purple">Todo</span>&apos;s tasks</h3>
+        <h3><span className="purple">Lista</span> de tareas</h3>
         {
          searchedTodos && searchedTodos.map((todo)=>{
             return <Todo 
