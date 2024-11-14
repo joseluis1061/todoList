@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import AppContext from '../context/AppContext';
-import '../styles/Header.css';
+import AppContext from '../../context/AppContext';
+import './Header.css';
 
 export const Header = () => {
   const { completedTodo, totalTodo, } = useContext(AppContext);

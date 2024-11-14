@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import AppContext from '../context/AppContext';
-import '../styles/Search.css';
+import AppContext from '../../context/AppContext';
+import './Search.css';
 
 export const Search = () => {
   const { searchValue, setSearchValue } = useContext(AppContext)

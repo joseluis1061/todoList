@@ -1,9 +1,9 @@
 import { Layout } from './layout/Layout';
-import { Header } from './components/Header';
-import { Search } from './components/Search';
-import { TodoList } from './components/TodoList';
-import { BtnNewTodo } from './components/BtnNewTodo';
-import { NewTodo } from './components/NewTodo';
+import { Header } from './components/Header/Header';
+import { Search } from './components/Search/Search';
+import { TodoList } from './components/TodoList/TodoList';
+import { BtnNewTodo } from './components/BtnNewTodo/BtnNewTodo';
+import { NewTodo } from './components/NewTodo/NewTodo';
 import { Modal } from './modal/Modal'; 
 
 import AppContext from './context/AppContext';

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import AppContext from '../context/AppContext';
-import '../styles/Todo.css';
+import AppContext from '../../context/AppContext';
+import './Todo.css';
 export const Todo = (todo) => {
   const { handleCompletedTodo, handleDeleteTodo } = useContext(AppContext);
 

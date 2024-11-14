@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import AppContext from '../context/AppContext';
-import '../styles/BtnNewTodo.css';
+import AppContext from '../../context/AppContext';
+import './BtnNewTodo.css';
 
 export const BtnNewTodo = () => {
   const {activeModal, setActiveModal} = useContext(AppContext);

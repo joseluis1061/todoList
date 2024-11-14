@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useState } from 'react';
-import AppContext from '../context/AppContext';
-import '../styles/NewTodo.css';
+import AppContext from '../../context/AppContext';
+import './NewTodo.css';
 
 export const NewTodo = () => {
   const { addTodo, setActiveModal } = useContext(AppContext);
