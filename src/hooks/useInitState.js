@@ -7,10 +7,6 @@ const useInitState = () => {
 
   const { item: todos, saveItem: saveTodo, error } = useLocalStorage('todos', []);
 
-  // const searchedTodos = todos.filter(item => {
-  //   return item.task.toLowerCase().includes(searchValue.toLowerCase())
-  // });
-
   const searchedTodos = todos.filter(
     (todo) => {
       const todoText = todo.text.toLowerCase();
@@ -19,20 +15,11 @@ const useInitState = () => {
     }
   );
 
-  // const searchedTodos = useMemo(() => {
-  //   return todos && todos.filter(item => item.task.toLowerCase().includes(searchValue.toLowerCase())) || [];
-  // }, [todos, searchValue]);
-
   const completedTodo = todos.filter(item => {
     return !!item.completed
   }).length;
 
-  // const completedTodo = useMemo(() => {
-  //   return todos && todos.filter(item => !!item.completed).length || 0;
-  // }, [todos]);
-
   const totalTodo = todos.length;
-  // const totalTodo = useMemo(() => todos?.length || 0, [todos]);
 
   //Random id
   const idGenerator = () => {
@@ -42,10 +29,7 @@ const useInitState = () => {
   };
 
   const addTodo = (text) => {
-    //const newTodos = [...todos];
-    console.log("Texto: ", text)
     const newTodos = todos ? [...todos] : [];
-    console.log("newTodos", newTodos)
       newTodos.push({
         id: idGenerator(),
         text,

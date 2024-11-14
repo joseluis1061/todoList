@@ -1,26 +1,21 @@
 import { useContext } from 'react';
 import AppContext from '../context/AppContext';
 import '../styles/Todo.css';
-// { todo, setCompletedTodo, setDeledTodo }
 export const Todo = (todo) => {
   const { handleCompletedTodo, handleDeleteTodo } = useContext(AppContext);
 
   const handleCompleted = () =>{
-    // const changeCheck = todo;
-    // changeCheck.complete = !todo.complete;
-    //setCompletedTodo(changeCheck)
-    handleCompletedTodo(todo.id);
+    console.log("Item todo 1", todo.todo.id)
+    handleCompletedTodo(todo.todo.id);
   };
 
   const handleDeled = () =>{
-    //const changeDeled = todo;
-    // setDeledTodo(changeDeled);
-    handleDeleteTodo(todo.id);
+    handleDeleteTodo(todo.todo.id);
   };
 
   return (
     <div className='todo'>
-      <span className={todo.completed=== true?
+      <span className={todo.todo.completed=== true?
           'check'
           :
           'todo_complete'        
@@ -29,7 +24,7 @@ export const Todo = (todo) => {
       >
         <i className="fa-solid fa-check-double"></i>
       </span>
-      <li className='todo_task'>{todo.text}</li>
+      <li className='todo_task'>{todo.todo.text}</li>
       <span 
         className='todo_delete'
         onClick={handleDeled}
