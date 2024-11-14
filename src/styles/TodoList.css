@@ -1,0 +1,10 @@
+.todo_list_container{
+  max-width: 450px;
+  margin: 0 auto;
+}
+.todo_list h3{
+  width: 100%;
+  font-size: 1.8rem;
+  color: var(--white);
+  text-align: left;
+}

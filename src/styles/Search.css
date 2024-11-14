@@ -1,0 +1,33 @@
+.search{
+  width: 100%;
+  max-width: 450px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+  margin-bottom: 15px;
+  background-color: var(--blue-dark);
+  border-radius: 15px;
+  margin-bottom: 25px;
+}
+.search_container{
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 10% 90%;
+  justify-content: center;
+  align-items: center;
+}
+.search_input{
+  height:100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--white);
+}
+.search_icon{
+  color: var(--blue-light);
+}

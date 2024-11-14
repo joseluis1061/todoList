@@ -1,0 +1,48 @@
+.new_todo{
+  margin: 0 auto;
+  max-width: 450px;
+  padding: 20px 10px;
+  border: 1px solid white;
+  border-radius: 15px;
+}
+.new_todo h2{
+  color: var(--white);
+}
+.new_todo textarea{
+  padding: 15px;
+  min-width: 98%;
+  min-height: 150px;
+  border: none;
+  border-radius: 15px;
+  background-color: var(--blue-dark);
+  color: var(--white);
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.btn_container{
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.btn_new{
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  background-color: transparent;
+}
+.btn_cancel{
+  border: 1px solid var(--blue-dark);
+  background-color: var(--blue-dark);
+  color: white;
+  font-weight: bold;
+}
+.btn_add{
+  border: 1px solid transparent;
+  background-color: var(--purple);
+  color: white;
+  font-weight: bold;
+}
