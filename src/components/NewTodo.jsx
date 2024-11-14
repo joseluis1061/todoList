@@ -4,25 +4,14 @@ import AppContext from '../context/AppContext';
 import '../styles/NewTodo.css';
 
 export const NewTodo = () => {
-  const { setAddTodo, setActiveModal } = useContext(AppContext);
+  const { addTodo, setActiveModal } = useContext(AppContext);
   const [texto, setTexto] = useState('');
 
-  //Random id
-  const idGenerator = () => {
-    const data = Date.now().toString(36);
-    const random = Math.random().toString(36).substring(2);
-    return data+random;
-  };
   //Add New Todo
   const handleAddTodo = (e) => {
     e.preventDefault();
     if(Object.keys(texto).length > 0){
-      const newTodo = {
-        task: texto, 
-        complete:false, 
-        id : idGenerator()
-      }
-      setAddTodo(newTodo)
+      addTodo(texto)
       setTexto('');
       setActiveModal(false);
     }else{

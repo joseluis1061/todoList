@@ -1,107 +1,92 @@
-import { useState, useEffect } from 'react';
-
+import { useState } from 'react';
+import {useLocalStorage} from './useLocalStorage'
 const useInitState = () => {
-  ////***************************** */
-  const [todoListTask, setTodoListTask] = useState([]); // Base de datos de localStorage
-  const [todoTask, setTodoTask] = useState(todoListTask); // Base de datos para los componentes
 
-
-  //Local Storage
-  useEffect(() => {
-    const obtenerLocalStorage = async () => {
-      const remoteTodos = localStorage.getItem('todos_v1');
-      if(!remoteTodos){
-        localStorage.setItem('todos_v1', JSON.stringify( todoListTask ));
-      }else{
-        const datos = await JSON.parse(remoteTodos);
-        setTodoTask(datos);
-        setTodoListTask(datos);
-      }
-    }
-    obtenerLocalStorage();
-    // eslint-disable-next-line
-  }, []);
-
-  // Guarda los cambios en LocalStorage
-  useEffect(() => {
-    localStorage.setItem('todos_v1', JSON.stringify( todoListTask ));
-  }, [todoListTask])
-
-  // Operaciones CRUD en las listas
-  const [searchTask, setSearchTask] = useState('');
-  const [completedTodo, setCompletedTodo] = useState({});
-  const [deledTodo, setDeledTodo] = useState({});
-  const [addTodo, setAddTodo] = useState({});
+  const [searchValue, setSearchValue] = useState('');
   const [activeModal, setActiveModal] = useState(false);
 
+  const { item: todos, saveItem: saveTodo, error } = useLocalStorage('todos', []);
 
-  //Buscar una tarea
-  useEffect(()=> {
-    if(Object.keys(searchTask).length>0){
-      const keySearch = searchTask.toLowerCase();
-      const todoFilters = todoListTask.filter((todo)=>{
-        return todo.task.toLowerCase().includes(keySearch);
-      })
-      if(Object.keys(todoFilters).length >0){
-        setTodoTask(todoFilters);
-        return
-      }
-    }else{
-      setTodoTask(todoListTask);
+  // const searchedTodos = todos.filter(item => {
+  //   return item.task.toLowerCase().includes(searchValue.toLowerCase())
+  // });
+
+  const searchedTodos = todos.filter(
+    (todo) => {
+      const todoText = todo.text.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+      return todoText.includes(searchText);
     }
-    // eslint-disable-next-line
-  }, [searchTask]);
+  );
 
-  // Agregar estado completado a una tarea
-  useEffect(()=>{    
-    if(Object.keys(completedTodo).length>0){
-      const filter = todoListTask.filter(todoList=>
-        todoList.id === completedTodo.id?
-          completedTodo: todoList
-      )
-      setTodoListTask(filter);
-      setTodoTask(filter);
-      setCompletedTodo({});
-      setSearchTask('');
-    }    
-    // eslint-disable-next-line
-  }, [completedTodo]);
+  // const searchedTodos = useMemo(() => {
+  //   return todos && todos.filter(item => item.task.toLowerCase().includes(searchValue.toLowerCase())) || [];
+  // }, [todos, searchValue]);
 
-  // Deled ToDo
-  useEffect(()=>{    
-    if(Object.keys(deledTodo).length>0){
-      const filterDelete = todoListTask.filter(todoList=>
-        todoList.id !== deledTodo.id &&
-          todoList
-      )
-      setTodoListTask(filterDelete);
-      setTodoTask(filterDelete);    
-      setSearchTask('');
-    }   
-    // eslint-disable-next-line 
-  }, [deledTodo]);
+  const completedTodo = todos.filter(item => {
+    return !!item.completed
+  }).length;
 
-  // Add ToDo
-  useEffect(()=>{    
-    if(Object.keys(addTodo).length>0){
-      setTodoListTask([...todoListTask, addTodo]);
-      setTodoTask([...todoListTask, addTodo]);
-      setSearchTask('');
-      setAddTodo({});
-    }    
-    // eslint-disable-next-line
-  }, [addTodo]);
+  // const completedTodo = useMemo(() => {
+  //   return todos && todos.filter(item => !!item.completed).length || 0;
+  // }, [todos]);
+
+  const totalTodo = todos.length;
+  // const totalTodo = useMemo(() => todos?.length || 0, [todos]);
+
+  //Random id
+  const idGenerator = () => {
+    const data = Date.now().toString(36);
+    const random = Math.random().toString(36).substring(2);
+    return data+random;
+  };
+
+  const addTodo = (text) => {
+    //const newTodos = [...todos];
+    console.log("Texto: ", text)
+    const newTodos = todos ? [...todos] : [];
+    console.log("newTodos", newTodos)
+      newTodos.push({
+        id: idGenerator(),
+        text,
+        completed: false,
+      });
+      saveTodo(newTodos);
+  };
+
+  const handleCompletedTodo = (index) => {
+    const newTodo = [...todos];
+    const todoIndex = newTodo.findIndex(item => {
+      return item.id === index;
+    })
+
+    newTodo[todoIndex].completed = !newTodo[todoIndex].completed;
+    saveTodo(newTodo);
+  }
+
+  const handleDeleteTodo = (index) => {
+    const newTodo = [...todos];
+    const todoIndex = newTodo.findIndex(item => {
+      return item.id === index;
+    })
+    newTodo.splice(todoIndex, 1);
+    saveTodo(newTodo);
+  }
 
   return {
-    todoListTask,
-    todoTask,
-    searchTask,
-    setSearchTask,
-    setCompletedTodo, 
-    setDeledTodo,
-    setAddTodo,
+    todos,
+    saveTodo,
+    completedTodo,
+    totalTodo,
+    searchedTodos,
+    handleCompletedTodo,
+    handleDeleteTodo,
+    searchValue,
+    setSearchValue,
     activeModal,
-    setActiveModal
+    setActiveModal,
+    addTodo,
+    error
   }
 }
 

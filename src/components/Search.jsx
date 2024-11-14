@@ -3,10 +3,10 @@ import AppContext from '../context/AppContext';
 import '../styles/Search.css';
 
 export const Search = () => {
-  const {searchTask, setSearchTask} = useContext(AppContext)
+  const { searchValue, setSearchValue } = useContext(AppContext)
   const handleSearch = (e)=>{
     const data = e.target.value;
-    setSearchTask(data);
+    setSearchValue(data);
   }
 
   return (
@@ -17,7 +17,7 @@ export const Search = () => {
         type="text" 
         placeholder='Search to do...' 
         className='search_input'
-        value = {searchTask}    
+        value = {searchValue}    
         onChange={handleSearch}
       />
       </div>

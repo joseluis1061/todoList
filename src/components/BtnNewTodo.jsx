@@ -3,7 +3,7 @@ import AppContext from '../context/AppContext';
 import '../styles/BtnNewTodo.css';
 
 export const BtnNewTodo = () => {
-  const {activeModal,setActiveModal} = useContext(AppContext);
+  const {activeModal, setActiveModal} = useContext(AppContext);
   const handleClick =()=>{
     setActiveModal(!activeModal);
   }
